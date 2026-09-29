@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# Cloud Foundry v2 supply lifecycle: installs a checksum-verified opencode binary
+# and exports OPENCODE_CLI_PATH, with autoupdate disabled. Configuring opencode
+# (provider, model, MCP servers, skills, agents) is the application's job, through
+# Spring AI ACP.
+
+set -euo pipefail
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3
+INDEX=$4
+BP_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+DEPS_INDEX_DIR="${DEPS_DIR}/${INDEX}"
+
+source "${BP_DIR}/lib/installer.sh"
+source "${BP_DIR}/lib/environment.sh"
+
+echo "-----> OpenCode Supply Buildpack $(tr -d '[:space:]' < "${BP_DIR}/VERSION")"
+
+for command in curl tar gzip; do
+    command -v "${command}" >/dev/null 2>&1 || {
+        echo "       ERROR: ${command} is required but not installed" >&2
+        exit 1
+    }
+done
+
+mkdir -p "${DEPS_INDEX_DIR}/bin" "${CACHE_DIR}"
+
+echo "       Installing verified jq"
+install_jq "${DEPS_INDEX_DIR}" "${BP_DIR}" "${CACHE_DIR}"
+
+echo "       Installing OpenCode CLI"
+install_opencode "${DEPS_INDEX_DIR}" "${CACHE_DIR}" "${BP_DIR}"
+
+setup_environment "${DEPS_INDEX_DIR}" "${BUILD_DIR}" "${INDEX}"
+create_config_file "${DEPS_INDEX_DIR}" "${BP_DIR}"
+verify_installation "${DEPS_INDEX_DIR}"
+
+echo "       OpenCode supply complete: $(get_opencode_version "${DEPS_INDEX_DIR}")"

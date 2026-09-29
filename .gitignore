@@ -1,0 +1,13 @@
+build/
+
+# IDE files
+*.iml
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Offline buildpack dependencies (bundled at release time, not committed)
+dependencies/*.tar.gz
+dependencies/jq-linux-*

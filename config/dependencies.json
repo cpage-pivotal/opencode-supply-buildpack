@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "dependencies": {
+    "opencode": {
+      "version": "1.18.33",
+      "failOnUpdate": true,
+      "license": "MIT",
+      "purl": "pkg:github/anomalyco/opencode@1.18.33",
+      "source": "https://github.com/anomalyco/opencode",
+      "sourceCommit": "51ef4be1d3c122f18fefb510dca8d778571f4f18",
+      "security": {
+        "minimumSecureVersion": "1.18.22",
+        "fixedAdvisories": [
+          {
+            "id": "GHSA-632h-h47v-g4x4",
+            "affectedVersions": ">=1.14.30 <1.18.22",
+            "url": "https://github.com/anomalyco/opencode/security/advisories/GHSA-632h-h47v-g4x4"
+          },
+          {
+            "id": "GHSA-c83v-7274-4vgp",
+            "affectedVersions": "<1.1.10",
+            "url": "https://github.com/anomalyco/opencode/security/advisories/GHSA-c83v-7274-4vgp"
+          },
+          {
+            "id": "GHSA-vxw4-wv6m-9hhh",
+            "affectedVersions": "<1.0.216",
+            "url": "https://github.com/anomalyco/opencode/security/advisories/GHSA-vxw4-wv6m-9hhh"
+          }
+        ]
+      },
+      "assets": {
+        "amd64": {
+          "filename": "opencode-linux-x64.tar.gz",
+          "url": "https://github.com/anomalyco/opencode/releases/download/v1.18.33/opencode-linux-x64.tar.gz",
+          "sha256": "e546123213ae47909a4268692aa4b94950d011afe9cac9938753a2194f1c16d5"
+        },
+        "arm64": {
+          "filename": "opencode-linux-arm64.tar.gz",
+          "url": "https://github.com/anomalyco/opencode/releases/download/v1.18.33/opencode-linux-arm64.tar.gz",
+          "sha256": "c63486624621924bf43be5c01abd252885661a734814224f6d70188a33aea858"
+        }
+      }
+    },
+    "jq": {
+      "version": "1.8.2",
+      "failOnUpdate": false,
+      "license": "MIT",
+      "purl": "pkg:github/jqlang/jq@jq-1.8.2",
+      "source": "https://github.com/jqlang/jq",
+      "assets": {
+        "amd64": {
+          "filename": "jq-linux-amd64",
+          "url": "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-linux-amd64",
+          "sha256": "b1c22172dd303f3be49e935aa56aa48a8b7a46e0bc838b4997d3bb451495870f"
+        },
+        "arm64": {
+          "filename": "jq-linux-arm64",
+          "url": "https://github.com/jqlang/jq/releases/download/jq-1.8.2/jq-linux-arm64",
+          "sha256": "8b85c817833814ddca00a144c33705546355afccf0cf39b188f3cdb48b852309"
+        }
+      }
+    }
+  }
+}
