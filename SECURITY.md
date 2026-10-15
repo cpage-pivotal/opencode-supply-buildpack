@@ -8,7 +8,7 @@ version it pins.
 | Component | Supported |
 | --- | --- |
 | Buildpack 1.0.x | Yes |
-| OpenCode 1.18.x bundled here | Yes |
+| OpenCode 1.19.x bundled here | Yes |
 | Earlier versions | No |
 
 ## Reporting a vulnerability
