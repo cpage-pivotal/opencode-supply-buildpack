@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "dependencies": {
     "opencode": {
-      "version": "1.19.3",
+      "version": "1.19.5",
       "failOnUpdate": true,
       "license": "MIT",
-      "purl": "pkg:github/anomalyco/opencode@1.19.3",
+      "purl": "pkg:github/anomalyco/opencode@1.19.5",
       "source": "https://github.com/anomalyco/opencode",
-      "sourceCommit": "e3c4eb242585dcd77be1a867391b7c25fd47ce52",
+      "sourceCommit": "810c0eba1a7348036f8bdf61e6632d0c36c6876c",
       "security": {
         "minimumSecureVersion": "1.18.22",
         "fixedAdvisories": [
@@ -31,13 +31,13 @@
       "assets": {
         "amd64": {
           "filename": "opencode-linux-x64.tar.gz",
-          "url": "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-linux-x64.tar.gz",
-          "sha256": "13a8fb2978302071b86f9d7e00da9c8895f9cd846978379c3bdc6a5333536c9b"
+          "url": "https://github.com/anomalyco/opencode/releases/download/v1.19.5/opencode-linux-x64.tar.gz",
+          "sha256": "588310a336fa3b9df36b3f0225b26f679d453efaad0cf3d66c3651ef3ec1647a"
         },
         "arm64": {
           "filename": "opencode-linux-arm64.tar.gz",
-          "url": "https://github.com/anomalyco/opencode/releases/download/v1.19.3/opencode-linux-arm64.tar.gz",
-          "sha256": "7900818a6a98881edbbadab4b7525940eff3b9750040c200481f9f56cacee405"
+          "url": "https://github.com/anomalyco/opencode/releases/download/v1.19.5/opencode-linux-arm64.tar.gz",
+          "sha256": "fae5be262d693b7c5e562856cc473e59e741772936db0c0600ac0d5ed5bd088b"
         }
       }
     },
