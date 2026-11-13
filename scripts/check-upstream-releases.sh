@@ -19,14 +19,34 @@ github_api() {
   curl "${args[@]}" "https://api.github.com/${path}"
 }
 
+# OpenCode follows the version the ACP registry publishes, which is what Spring AI ACP
+# Harness Client pins and verifies. GitHub's "latest" release still marks the 1.x line
+# after the registry moved to 2.x, so it is shown for information only.
+registry_url=https://cdn.agentclientprotocol.com/registry/v1/latest/registry.json
+
+registry_version() {
+  local agent=$1
+  curl --fail --silent --show-error --location \
+    --connect-timeout 15 --max-time 60 "${registry_url}" \
+    | jq -er --arg agent "${agent}" '.agents[] | select(.id == $agent) | .version'
+}
+
 updates=0
-while IFS=$'\t' read -r dependency repository prefix; do
+while IFS=$'\t' read -r dependency source repository prefix; do
   pinned=$(jq -r --arg dependency "${dependency}" \
     '.dependencies[$dependency].version' "${manifest}")
   blocking=$(jq -r --arg dependency "${dependency}" \
     '.dependencies[$dependency].failOnUpdate' "${manifest}")
   latest_tag=$(github_api "repos/${repository}/releases/latest" | jq -er '.tag_name')
-  latest=${latest_tag#"${prefix}"}
+  github_latest=${latest_tag#"${prefix}"}
+  if [ "${source}" = registry ]; then
+    latest=$(registry_version "${dependency}")
+    if [ "${github_latest}" != "${latest}" ]; then
+      echo "${dependency}: GitHub's latest release is ${github_latest} (informational; pins follow the ACP registry)"
+    fi
+  else
+    latest=${github_latest}
+  fi
   if [ "${pinned}" = "${latest}" ]; then
     echo "${dependency}: current (${pinned})"
   elif [ "${blocking}" = true ]; then
@@ -36,8 +56,8 @@ while IFS=$'\t' read -r dependency repository prefix; do
     echo "${dependency}: update available (${pinned} -> ${latest}) [non-blocking]"
   fi
 done <<'EOF'
-opencode	anomalyco/opencode	v
-jq	jqlang/jq	jq-
+opencode	registry	anomalyco/opencode	v
+jq	github	jqlang/jq	jq-
 EOF
 
 pinned_opencode=$(jq -r '.dependencies.opencode.version' "${manifest}")

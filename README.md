@@ -14,7 +14,7 @@ buildpack therefore writes no opencode configuration and reads no service
 bindings.
 
 - Buildpack: **1.0.0**
-- OpenCode: **1.19.5**
+- OpenCode: **2.2.7**
 - Architectures: Linux amd64 and arm64
 
 ## Usage
@@ -89,10 +89,13 @@ cf create-buildpack opencode_supply_buildpack opencode_supply_buildpack-cached-v
 ```bash
 make test        # bash -n, shellcheck, dependency metadata, tests/*-test.sh
 make package     # online zip + validated SBOM in build/
-make freshness   # compare pins with the latest upstream releases
+make freshness   # compare pins with upstream (opencode: the ACP registry's version)
 ```
 
-To bump opencode, edit `config/dependencies.json` (version, `sourceCommit`,
+OpenCode follows the version the [ACP registry](https://cdn.agentclientprotocol.com/registry/v1/latest/registry.json)
+publishes, which is the one Spring AI ACP pins and tests, rather than GitHub's
+"latest" release, which still marks the 1.x line. To bump opencode, edit
+`config/dependencies.json` (version, `sourceCommit`,
 `purl`, and both assets' URL and SHA-256) and the version in this README and
 SECURITY.md. Take the SHA-256s from the release's asset digests
 (`gh release view vX.Y.Z --repo anomalyco/opencode --json assets`). To bump jq,
