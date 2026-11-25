@@ -14,7 +14,7 @@ buildpack therefore writes no opencode configuration and reads no service
 bindings.
 
 - Buildpack: **1.0.0**
-- OpenCode: **2.2.7**
+- OpenCode: **2.4.1**
 - Architectures: Linux amd64 and arm64
 
 ## Usage
